@@ -1,0 +1,91 @@
+{% extends "user/layout.html" %}
+{% block title %}
+Registration Page
+{% endblock title%}
+
+
+{% block contents %}
+    <section class="min-vh-100 d-flex align-items-center justify-content-center position-relative py-5 mt-5">
+
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card p-4 p-md-5">
+                        <div class="text-center mb-5">
+                            <h2 class="fw-bold">Create Your Profile</h2>
+                            <p class="text-muted">Join the community and secure your spot.</p>
+                        </div>
+
+                        <form action="{{ url_for("user_register")}}" method="post" novalidate>
+                            {{ regform.csrf_token }}
+    <div class="row g-3">
+        <!-- Personal Info -->
+        <div class="col-md-6">
+            {{ regform.firstname.label( class_="form-label")}}
+            {{ regform.firstname(class_="form-control",placeholder='Enter firstname') }}
+            {% if regform.firstname.errors %}
+                {% for error in regform.firstname.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}
+        </div>
+                                <div class="col-md-6">
+                                    {{ regform.lastname.label( class_="form-label")}}
+            {{ regform.lastname(class_="form-control",placeholder='Enter Lastname') }}
+            {% if regform.lastname.errors %}
+                {% for error in regform.lastname.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}
+                                </div>
+
+                                <div class="col-12">
+                                     {{ regform.email.label( class_="form-label")}}
+            {{ regform.email(class_="form-control",placeholder='Enter Email') }}
+            {% if regform.email.errors %}
+                {% for error in regform.email.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}
+                                </div>
+
+                                <!-- Password -->
+                                <div class="col-md-6">
+                                   {{ regform.password.label( class_="form-label")}}
+            {{ regform.password(class_="form-control",placeholder='Enter Password') }}
+            {% if regform.password.errors %}
+                {% for error in regform.password.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}
+                                </div>
+                                <div class="col-md-6">
+                                     {{ regform.confirm_pass.label( class_="form-label")}}
+            {{ regform.confirm_pass(class_="form-control",placeholder='Confirm Password') }}
+            {% if regform.confirm_pass.errors %}
+                {% for error in regform.confirm_pass.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}
+                                </div>
+
+                          
+
+                                <div class="col-12 mt-3">
+                                    <button class="btn btn-custom w-100 p-3 fs-5" type="submit">Complete
+                                        Registration</button>
+                                </div>
+
+                                <div class="col-12 text-center mt-3">
+                                    <p class="text-muted small">Already have an account? <a href="login.html"
+                                            class="text-primary text-decoration-none">Login</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

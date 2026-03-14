@@ -1,0 +1,29 @@
+# Python
+__pycache__
+*.pyc
+*.pyd
+*.pyo
+.Python
+env
+venv
+# Virtual environment (standard locations)
+venv/
+env/
+vflaskapp/
+
+# Flask instance folder (contains config, db, etc. that should not be in git)
+instance/
+
+# Databases
+*.sqlite
+*.sqlite3
+
+# Development tools and dependencies
+.webassets-cache
+.pdm-python # PDM specific
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

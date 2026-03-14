@@ -1,0 +1,121 @@
+{% extends "user/layout.html" %}
+{% block contents %}
+    <!-- Hero Section -->
+    <section class="vh-100 d-flex align-items-center position-relative mt-md-5 bg-white border-bottom">
+        <div class="container position-relative z-index-2">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+
+                    <h1 class="display-3 fw-bold mb-4">
+                        Innovate. <br>
+                        <span class="text-gradient">Disrupt.</span> Build.
+                    </h1>
+                    <p class="lead text-muted mb-5" style="max-width: 500px;">
+                        Join thousands of developers, designers, and tech enthusiasts for the biggest tech conference of
+                        the year. Explore the future of AI, Web3, and Cloud Computing.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="purchase-ticket.html"
+                            class="btn btn-custom btn-lg animate__animated animate__pulse animate__infinite">Get Your
+                            Ticket</a>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center animate__animated animate__pulse d-none d-md-block">
+
+                    <div class="position-relative mx-auto" style="width: 350px; height: 350px;">
+                        <!-- Icon 1: Top Left-ish -->
+                        <div class="glass-card position-absolute d-flex align-items-center justify-content-center"
+                            style="width: 150px; height: 150px; top: 0; left: 40px; transform: rotate(-6deg); z-index: 1;">
+                            <i class="bi bi-code-slash display-3 text-primary"></i>
+                        </div>
+                        <!-- Icon 2: Middle Right -->
+                        <div class="glass-card position-absolute d-flex align-items-center justify-content-center bg-white"
+                            style="width: 150px; height: 150px; top: 80px; right: 10px; transform: rotate(8deg); z-index: 2;">
+                            <i class="bi bi-cpu display-3 text-danger"></i>
+                        </div>
+                        <!-- Icon 3: Bottom Left -->
+                        <div class="glass-card position-absolute d-flex align-items-center justify-content-center"
+                            style="width: 150px; height: 150px; bottom: 20px; left: 30px; transform: rotate(-4deg); z-index: 3;">
+                            <i class="bi bi-globe display-3 text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Join the Conversation CTA -->
+    <section id="conversation" class="py-5 bg-primary bg-opacity-10">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-3">Join the Ongoing Conversation</h2>
+                    <p class="text-muted lead mb-4">Connect with fellow developers, share your ideas, discuss the latest
+                        trends, and get answers from experts before the conference even starts.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+                        <a href="{{ url_for('conversations')}}" class="btn btn-primary px-5 py-3 rounded-pill fw-bold shadow-sm">
+                            <i class="bi bi-chat-dots-fill me-2"></i>Start Discussing
+                        </a>
+                    </div>
+
+                    <div class="glass-card p-4 mx-auto" style="max-width: 600px;">
+                        <h4 class="fw-bold mb-3">Stay Updated</h4>
+                        <p class="small text-muted mb-4">Get the latest news and early bird ticket alerts delivered to
+                            your inbox.</p>
+                        <form class="d-flex gap-2">
+                            <input type="email" class="form-control border-0 shadow-none" placeholder="Enter your email"
+                                required>
+                            <button type="submit" class="btn btn-dark rounded-pill px-4">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodation Section -->
+    <section id="accommodation" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10 text-center animate__animated animate__fadeInUp">
+                    <h2 class="fw-bold">Accommodation</h2>
+                    <p class="text-muted">Stay close to the action. We've partnered with local hotels to offer exclusive
+                        rates.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                {% if properties.status%}
+                <!-- Hotel 1 -->
+                 {% for p in properties.data %}
+                <div class="col-md-4">
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column">
+                        <img src="{{p.image }}" class="img-fluid w-100" alt="Grand Tech Hotel"
+                            style="height: 200px; object-fit: cover;">
+                        <div class="p-4 flex-grow-1 d-flex flex-column">
+                            <h4 class="fw-bold mb-2">{{p.name}}</h4>
+
+                          
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary">{{p.contact }}</span>
+                                    <span class="fw-bold">&#8358;{{p.price}}<small
+                                            class="text-muted fw-normal"></small></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+                {%else %}
+                <p class="alert alert-info">{{ properties.message}}</p>
+                {%endif%}
+
+        
+            </div>
+        </div>
+    </section>
+{% endblock contents %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>File upload Using  flask form</h1>
+                        {% with message = get_flashed_messages(with_categories=True) %}
+                            {% for cat,msg in message %}
+                                <p class="alert alert-{{ cat }}">{{ msg }}</p>
+                            {% endfor %}
+                        {% endwith %}
+<form action="{{ url_for('upload_flask_form')}}" method="post" enctype="multipart/form-data">
+{{photoform.csrf_token }}
+    <div class="mb-3">
+      {{ photoform.photo.label }}
+      {{ photoform.photo(class_="form-control border-secondary") }}
+{% if photoform.photo.errors %}
+{% for error in photoform.photo.errors%}
+    <small class="text-danger">{{error}}</small>
+    {% endfor %}
+{% endif %}
+    </div>
+    {{ photoform.btn(class_='btn btn-lg btn-danger')}}
+</form>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

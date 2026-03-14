@@ -1,0 +1,46 @@
+{% extends "user/layout.html" %}
+{%block contents %}
+<section class="min-vh-100 d-flex align-items-center py-5 mt-5 bg-light">
+<div class="container">
+<div class="row justify-content-center mb-5">
+<div class="col-lg-10">
+    <h2 class="fw-bold mb-4">Order Confirmation</h2>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col" class="py-3 border-0 rounded-start">Transaction ID</th>
+                            <th scope="col" class="py-3 border-0">Date</th>
+                            <th scope="col" class="py-3 border-0">Ticket Type</th>
+                            <th scope="col" class="py-3 border-0">Amount</th>
+                            <th scope="col" class="py-3 border-0 rounded-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+<tr>
+    <td class="fw-semibold">{{ords.ord_order_ref}}</td>
+    <td class="text-muted">{{ords.ord_created_at}}</td>
+    <td>{{ ords.ticket.tkt_name }}</td>
+    <td class="fw-bold">&#8358;{{ ords.ord_total_amount }}</td>
+    <td>
+<a href="{{ url_for('start_paystack')}}" class="btn btn-sm btn-danger rounded-pill">Make Payment</a>
+    </td>
+</tr>
+
+                     
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+{%endblock %}

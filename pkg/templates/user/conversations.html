@@ -1,0 +1,60 @@
+{% extends "user/layout.html" %}
+{% block title %}Join The Conversation {%endblock%}
+{% block contents %}
+    <section class="min-vh-100 py-5 mt-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <h2 class="fw-bold display-6 mb-0">Conversations</h2>
+    {% if session.get("useronline") and session.get("userid")%}
+        <a href="{{ url_for('create_topic')}}" class="btn btn-custom rounded-pill px-4 fw-bold shadow-sm">
+            <i class="bi bi-plus-circle me-2"></i>New Topic
+        </a>
+    {% endif %}
+   
+
+                    </div>
+{% set message = get_flashed_messages(with_categories=True)%}
+{% if message %}
+    {% for cat,msg in message :%}
+        <p class="alert alert-{{cat}}">{{msg}}</p>
+    {% endfor %}
+{% endif %}
+
+{# {{ convo }} #}
+{%if convo %}
+         {% for c in convo %}
+        <a href="{{ url_for('conversation_detail',id=c.con_id)}}" class="text-decoration-none">
+            <div class="card border-0 shadow-sm rounded-4 mb-4 hover-shadow transition-all">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+
+    <small class="text-muted">
+    {% if c.con_created_by == session.get("userid") %}
+    You {{c.con_created_at}}
+    {% else %}
+        {{ c.creator.usr_firstname}} {{ c.creator.usr_lastname}} {{c.con_created_at}}
+    {% endif %}
+    </small>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">{{ c.con_title }}
+                    </h4>
+                    <p class="text-secondary mb-3">{{ c.con_content }}</p>
+
+                    <div class="d-flex gap-4 text-muted small fw-semibold">
+
+                        <span><i class="bi bi-chat-dots me-1"></i> {{ c.messages|length }} Comments</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor%}
+{% else %}
+<p class="alert alert-info">No conversation has been posted yet. <a href='/create/topic/'>Post Conversation</a></p>
+{% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock contents %}

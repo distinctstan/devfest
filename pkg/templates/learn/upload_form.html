@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>File upload without flask form</h1>
+                        {% with message = get_flashed_messages(with_categories=True) %}
+                            {% for cat,msg in message %}
+                                <p class="alert alert-{{ cat }}">{{ msg }}</p>
+                            {% endfor %}
+                        {% endwith %}
+                    <form action="{{ url_for('upload_form')}}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf_token" value="{{ csrf_token()}}">
+                      <div class="mb-3">
+                            <label>Select File</label>                           
+                            <input type="file" name="photo" class="form-control border-secondary">
+                            <input type="text" name="caption" class="form-control border-secondary" placeholder="enter the caption">
+                      </div>
+                      <button class="btn btn-lg btn-success">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

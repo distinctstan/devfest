@@ -1,0 +1,75 @@
+{% extends "user/layout.html" %}
+
+{% block title %}
+Login Here 
+{% endblock %}
+
+{% block contents %}
+    <section class="vh-100 d-flex align-items-center mt-5 justify-content-center position-relative">
+
+
+        <div class="container mt-2">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <div class="glass-card p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold">Welcome Back</h2>
+                            <p class="text-muted">Login to access your profile and schedule.</p>
+                        {% with message = get_flashed_messages(with_categories=True) %}
+                            {% for cat,msg in message %}
+                                <p class="alert alert-{{ cat }}">{{ msg }}</p>
+                            {% endfor %}
+                        {% endwith %}
+                        </div>
+
+<form action="{{ url_for('user_login')}}" method="post">
+    {{ form.csrf_token}}
+    <div class="mb-3">
+        {{ form.email.label(class_='form-label') }}
+        
+        <div class="input-group">
+            <span class="input-group-text bg-transparent border-end-0 text-muted"
+                style="border-color: #E9ECEF;"><i class="bi bi-envelope"></i></span>
+{{ form.email(class_="form-control border-start-0 ps-0",placeholder="name@example.com")}}
+ {% if form.email.errors %}
+    {% for error in form.email.errors%}
+    <small class="text-danger">{{error}}</small>
+    {% endfor %}
+{% endif %}
+               
+        </div>
+    </div>
+    <div class="mb-4">
+        {{ form.password.label(class_="form-label") }}
+       
+        <div class="input-group">
+            <span class="input-group-text bg-transparent border-end-0 text-muted"
+                style="border-color: #E9ECEF;"><i class="bi bi-lock"></i></span>
+                {{ form.password(class_="form-control border-start-0 ps-0",placeholder="••••••••")}}
+
+                 {% if form.password.errors %}
+    {% for error in form.password.errors%}
+    <small class="text-danger">{{error}}</small>
+    {% endfor %}
+{% endif %}
+          
+        </div>
+    </div>
+    {{ form.btnlogin(class_="btn btn-custom w-100 mb-3")}}
+
+    <div class="text-center">
+        <p class="text-muted small mb-0">Don't have an account? <a href="{{url_for('user_register')}}"
+                class="text-danger text-decoration-none">Register</a></p>
+    </div>
+</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock contents %}
+
+{% block sponsors %}
+
+{% endblock %}
+ 

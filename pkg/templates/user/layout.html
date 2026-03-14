@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Join DevFest 2026, the premier global tech conference. Explore the future of AI, Web3, and Cloud with industry experts. Get your tickets today!">
+    <title>DevFest 2026 - {%block title %} 
+         The Future of Tech {%endblock title %}</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/static/css/animate.min.css" />
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
+                <i class="bi bi-cpu-fill me-2"></i>DevFest
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+
+
+        <li class="nav-item"><a class="nav-link" href="{{url_for('conversations')}}">Conversation</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#accommodation">Accommodation</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{url_for('index')}}#sponsors">Sponsors</a></li>
+{% if session.get('useronline') and session.get('userid') %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="fw-semibold">Hi, {{ session.get("useronline")}}</span>
+                <i class="bi bi-person-circle fs-5"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
+                <li><a class="dropdown-item" href="{{ url_for('profile')}}"><i
+                            class="bi bi-person me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('view_tickets')}}"><i
+                            class="bi bi-ticket-perforated me-2"></i>My
+                        Tickets</a></li>
+                <li><a class="dropdown-item" href="transactions.html"><i
+                            class="bi bi-clock-history me-2"></i>Transactions</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('user_sessions')}}"><i
+                            class="bi bi-calendar-check me-2"></i>My Sessions</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="{{ url_for('logout')}}"><i
+                            class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+        </li>
+{% else %}
+    <li class="nav-item ms-lg-3">
+        <a href="{{ url_for('user_login')}}" class="btn btn-custom btn-sm me-2">Login</a>
+    </li>
+      <li class="nav-item ms-lg-3">
+        <a href="{{ url_for('user_register')}}" class="btn btn-outline-custom btn-sm me-2">Register</a>
+    </li>
+{% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block contents %}
+
+    {% endblock contents %}
+
+    {% block sponsors %}
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="py-5 bg-white border-top">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="fw-bold fs-3">Our Partners & Sponsors</h2>
+                    <p class="text-muted">Proudly supported by industry leaders.</p>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center g-5 text-center grayscale-logos">
+                <div class="col-6 col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="bi bi-google fs-1 text-muted mb-2"></i>
+                        <span class="fw-bold text-muted">Google</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="bi bi-microsoft fs-1 text-muted mb-2"></i>
+                        <span class="fw-bold text-muted">Microsoft</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="bi bi-nvidia fs-1 text-muted mb-2"></i>
+                        <span class="fw-bold text-muted">NVIDIA</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="bi bi-amazon fs-1 text-muted mb-2"></i>
+                        <span class="fw-bold text-muted">AWS</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="bi bi-github fs-1 text-muted mb-2"></i>
+                        <span class="fw-bold text-muted">GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock sponsors%}
+
+    <footer class="py-4 mt-5 border-top border-secondary border-opacity-25">
+        <div class="container text-center">
+            <p class="text-muted mb-0">&copy; 2026 DevFest. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/jquery.min.js"></script>
+    {% block customjs %}
+
+    {% endblock customjs %}
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+{% extends "user/layout.html"%}
+{% block contents %}
+    <section class="min-vh-100 py-5 mt-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+
+                    <a href="/conversations/"
+                        class="text-decoration-none text-muted mb-4 d-inline-block hover-primary">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Conversations
+                    </a>
+
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <h2 class="fw-bold mb-4">Start a New Topic</h2>
+                            <p class="text-muted mb-4">Share your thoughts, ask questions, or start a discussion with
+                                the DevFest community.</p>
+
+                            <form method="post" action="">
+                                {{convform.csrf_token }}
+    <div class="mb-4">
+        {{ convform.title.label(class_="form-label fw-semibold")}}
+        {{ convform.title(class_="form-control form-control-lg bg-light border-secondary")}}  
+           {% if convform.title.errors %}
+                {% for error in convform.title.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %}      
+    </div>
+<div class="mb-4">
+    {{ convform.content.label(class_="form-label fw-semibold")}}
+    {{ convform.content(class_="form-control bg-light border-secondary",placeholder="Type your message here...",rows="8")}}
+      {% if convform.content.errors %}
+                {% for error in convform.content.errors%}
+                <small class="text-danger">{{error}}</small>
+                {% endfor %}
+            {% endif %} 
+</div>
+
+    <div class="d-flex justify-content-end gap-3">
+        <a href="/conversations/"
+            class="btn btn-outline-secondary rounded-pill px-4 fw-semibold">Cancel</a>
+            {{ convform.btnsubmit(class_="btn btn-custom rounded-pill px-5 fw-bold shadow-sm")}}
+    </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

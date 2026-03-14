@@ -1,0 +1,113 @@
+{% extends "user/layout.html" %}
+{% block contents %}
+<section class="min-vh-100 py-5 mt-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <a href="/conversations/" class="text-danger mb-4 d-inline-block">
+                    Back to Conversations
+                </a>
+
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4 p-lg-5">
+
+                        <!-- Topic Header -->
+                        <div class="mb-4 pb-4 border-bottom">
+
+                            <h1 class="fw-bold mb-3">{{deets.con_title}}</h1>
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <img src="images/avatar.jpg" style="max-width:48px;"
+                                        class="img-fluid rounded-3 me-2" alt="">
+                                </div>
+                                <div>
+                                    <p class="mb-0 fw-bold">Sarah Jenkins <span
+                                            class="small fw-normal text-muted">5th
+                                            March,
+                                            2026</span></p>
+
+                                </div>
+                            </div>
+                            <div class="text-secondary lh-lg mb-4">
+                                <p>We are planning a major rewrite of our legacy system. I'm curious what everyone's
+                                    take is on starting with a modular monolith vs going straight to microservices
+                                    in 2026.</p>
+                                <p>With the new tooling available, is the overhead of microservices still a major
+                                    concern? Our team is about 15 developers, and we expect to scale to 30 by end of
+                                    year.</p>
+                                <p>I've heard mixed reviews about the "service mesh everywhere" approach. Would love
+                                    to hear real-world experiences!</p>
+                            </div>
+
+                        </div>
+
+                        <!-- Comments Section -->
+                        <h4 class="fw-bold mb-4">Comments (24)</h4>
+
+                        <!-- Comment 1 -->
+                        <div class="d-flex mb-4">
+
+                            <div class="flex-grow-1">
+                                <div class="bg-light p-3 rounded-4 rounded-top-0 mb-1">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="fw-bold mb-0 small">John Doe</h6>
+                                        <small class="text-muted" style="font-size: 0.75rem;">6th March,
+                                            2026 </small>
+                                    </div>
+                                    <p class="mb-0 small text-secondary">
+                                        I'd highly recommend starting with a modular monolith. It keeps deployment
+                                        simple and you can split services out as scaling needs arise. At 15 devs,
+                                        microservices might add more friction than value.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Comment 2 -->
+                        <div class="d-flex mb-4">
+
+                            <div class="flex-grow-1">
+                                <div class="bg-light p-3 rounded-4 rounded-top-0 mb-1">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="fw-bold mb-0 small">Mike K.</h6>
+                                        <small class="text-muted" style="font-size: 0.75rem;">6th March,
+                                            2026</small>
+                                    </div>
+                                    <p class="mb-0 small text-secondary">
+                                        With Kubernetes being so simplified now, the overhead isn't what it used to
+                                        be. If your team is large enough, microservices might save you from stepping
+                                        on each other's toes. But I agree, don't over-engineer early.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex mb-4">
+
+                            <div class="flex-grow-1">
+                                <div class="card border-primary border-opacity-25 shadow-sm p-3 rounded-4">
+                                    <h6 class="fw-bold mb-2 small text-primary">Post a reply</h6>
+                                    <form>
+                                        <textarea class="form-control border-0 bg-light mb-3" rows="3"
+                                            placeholder="Join the discussion..."></textarea>
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button"
+                                                class="btn btn-custom rounded-pill px-4 fw-semibold sm-shadow">Post
+                                                Comment</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

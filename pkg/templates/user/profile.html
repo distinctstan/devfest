@@ -1,0 +1,128 @@
+{% extends "user/layout.html" %}
+{% block contents %}
+
+    <section class="min-vh-100 d-flex align-items-center position-relative py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+    {% with message = get_flashed_messages(with_categories=True) %}
+                            {% for cat,msg in message %}
+                                <p class="alert alert-{{ cat }}">{{ msg }}</p>
+                            {% endfor %}
+                        {% endwith %}
+ 
+                    <!-- Profile Header & Settings -->
+                    <div class="glass-card p-4 p-md-5 mb-5">
+                        <div class="text-center mb-5">
+                            <div class="mb-3">
+    <div class="rounded-circle overflow-hidden bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3"  style="width: 120px; height: 120px;">
+        {% if userdeets.usr_image == None %}
+            <i class="bi bi-person-fill display-3 text-muted"></i>
+        {%else%}   
+            <img src="{{url_for('static',filename='uploads/'+userdeets.usr_image)}}" class="w-100 h-100 object-fit-cover" alt="Profile" style="border:2px solid red">
+        {% endif %}
+                                </div>
+<form method="post" enctype="multipart/form-data" action="{{url_for('profile_picture')}}">
+{{photoform.csrf_token }}
+<div class="d-flex justify-content-center"> 
+    {{photoform.photo(class_="form-control w-auto",accept="image/*")}}   
+    {{photoform.btn(class_="btn-sm btn-custom")}}     
+</div>
+</form>
+                            </div>
+                            <h2 class="fw-bold">Profile Settings</h2>
+                            <p class="text-muted">Manage your personal information and preferences.</p>
+                        </div>
+
+<form method="post" action ="{{ url_for('profile')}}">
+    {{ prof.csrf_token }}
+<div class="row g-4">
+    <div class="col-md-6">
+        {{prof.firstname.label(class_="form-label text-muted small fw-bold")}}
+        {{ prof.firstname(class_="form-control border-secondary", value=userdeets.usr_firstname)}}
+    {% if prof.firstname.errors %}
+        {% for error in prof.firstname.errors%}
+        <small class="text-danger">{{error}}</small>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-md-6">
+        {{prof.lastname.label(class_="form-label text-muted small fw-bold")}}
+        {{ prof.lastname(class_="form-control border-secondary",value=userdeets.usr_lastname)}}
+    {% if prof.lastname.errors %}
+        {% for error in prof.lastname.errors%}
+        <small class="text-danger">{{error}}</small>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-12">
+        <label for="email" class="form-label text-muted small fw-bold">Email Address</label>
+        <input type="email" class="form-control" id="email" value="{{userdeets.usr_email}}"
+            disabled>
+    </div>
+<div class="col-12">
+    <label for="category" class="form-label text-muted small fw-bold">Developer
+        Category</label>
+    <select class="form-select p-2 border-secondary" name="category" id="category">
+        {% for t in tracks%}
+        {% if t.trk_id == userdeets.usr_track_id  %}
+         <option value="{{t.trk_id }}" selected>{{ t.trk_level|capitalize }}</option>
+        {%else %}
+            <option value="{{t.trk_id }}">{{ t.trk_level|capitalize }}</option>
+        {%endif%}
+
+        {% endfor %}
+    </select>
+</div>
+<div class="col-12">
+    {{prof.summary.label(class_="form-label text-muted small fw-bold")}}
+    {{prof.summary(class_="form-control border-secondary",rows="4")}}
+    {% if prof.summary.errors %}
+        {% for error in prof.summary.errors%}
+        <small class="text-danger">{{error}}</small>
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="col-12 text-end">
+    {{ prof.btnsubmit(class_="btn btn-custom px-4") }}
+</div>
+    </div>
+    </form>
+</div>
+
+                    <!-- Security Settings -->
+                    <div class="glass-card p-4 p-md-5">
+                        <div class="mb-4">
+                            <h3 class="fw-bold h4">Security</h3>
+                            <p class="text-muted small">Update your password to keep your account secure.</p>
+                        </div>
+                        <form>
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <label for="currentPassword" class="form-label text-muted small fw-bold">Current
+                                        Password</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="newPassword" class="form-label text-muted small fw-bold">New
+                                        Password</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirmPassword" class="form-label text-muted small fw-bold">Confirm New
+                                        Password</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-custom px-4">Update Password</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+ {% endblock %} 
