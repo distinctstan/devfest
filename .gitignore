@@ -12,7 +12,7 @@ env/
 vflaskapp/
 
 # Flask instance folder (contains config, db, etc. that should not be in git)
-instance/
+# instance/
 
 # Databases
 *.sqlite
