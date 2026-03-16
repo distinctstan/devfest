@@ -1,0 +1,8 @@
+---
+kind: wasmer.io/App.v0
+name: devfest
+package: devfest@0.1.0
+cli_args: # This is the command we want the python runner to run on Wasmer Edge
+  - main
+env:
+  PYTHONEXECUTABLE: /bin/python # This is the path to the python executable
