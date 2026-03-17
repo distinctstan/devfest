@@ -27,21 +27,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `admins`
 --
 
-CREATE TABLE `admins` (
-  `adm_id` bigint(20) NOT NULL,
+/*CREATE TABLE `admins` (
+  `adm_id` bigint(20) NOT NULL PRIMARY KEY,
   `adm_role` enum('super','manager') NOT NULL,
   `adm_full_name` varchar(150) NOT NULL,
   `adm_email` varchar(150) NOT NULL,
   `adm_password_hash` varchar(255) NOT NULL,
   `adm_created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;*/
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`adm_id`, `adm_role`, `adm_full_name`, `adm_email`, `adm_password_hash`, `adm_created_at`) VALUES
-(1, 'super', 'Super Administrator', 'admin@devfest.com', 'scrypt:32768:8:1$u2vO4ngqfJeA15I7$6ea6f76fa88959bb044d1f459d5c4de7704018b36d64426c84dcae04b73c1a40407893f1a3fb599eccf9a402926583bb27719baa580a276c104e552bde755221', '2026-03-10 16:17:44');
+/*INSERT INTO `admins` (`adm_id`, `adm_role`, `adm_full_name`, `adm_email`, `adm_password_hash`, `adm_created_at`) VALUES
+(1, 'super', 'Super Administrator', 'admin@devfest.com', 'scrypt:32768:8:1$u2vO4ngqfJeA15I7$6ea6f76fa88959bb044d1f459d5c4de7704018b36d64426c84dcae04b73c1a40407893f1a3fb599eccf9a402926583bb27719baa580a276c104e552bde755221', '2026-03-10 16:17:44');*/
 
 -- --------------------------------------------------------
 
@@ -50,6 +50,7 @@ INSERT INTO `admins` (`adm_id`, `adm_role`, `adm_full_name`, `adm_email`, `adm_p
 --
 
 CREATE TABLE `alembic_version` (
+  `id` INT(11) NOT NULL PRIMARY KEY,
   `version_num` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -67,7 +68,7 @@ INSERT INTO `alembic_version` (`version_num`) VALUES
 --
 
 CREATE TABLE `conversations` (
-  `con_id` bigint(20) NOT NULL,
+  `con_id` bigint(20) NOT NULL PRIMARY KEY,
   `con_title` varchar(200) DEFAULT NULL,
   `con_content` text NOT NULL,
   `con_created_by` bigint(20) DEFAULT NULL,
@@ -90,7 +91,7 @@ INSERT INTO `conversations` (`con_id`, `con_title`, `con_content`, `con_created_
 --
 
 CREATE TABLE `conversation_messages` (
-  `msg_id` bigint(20) NOT NULL,
+  `msg_id` bigint(20) NOT NULL PRIMARY KEY,
   `msg_conversation_id` bigint(20) NOT NULL,
   `msg_user_id` bigint(20) DEFAULT NULL,
   `msg_message` text NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE `conversation_messages` (
 --
 
 CREATE TABLE `orders` (
-  `ord_id` bigint(20) NOT NULL,
+  `ord_id` bigint(20) NOT NULL PRIMARY KEY,
   `ord_user_id` bigint(20) NOT NULL,
   `ord_ticket_id` bigint(20) DEFAULT NULL,
   `ord_order_ref` varchar(50) DEFAULT NULL,
@@ -133,7 +134,7 @@ INSERT INTO `orders` (`ord_id`, `ord_user_id`, `ord_ticket_id`, `ord_order_ref`,
 --
 
 CREATE TABLE `payment` (
-  `pay_id` bigint(20) NOT NULL,
+  `pay_id` bigint(20) NOT NULL PRIMARY KEY,
   `pay_order_id` bigint(20) NOT NULL,
   `pay_payment_ref` varchar(100) DEFAULT NULL,
   `pay_amount` decimal(10,2) NOT NULL,
@@ -163,7 +164,7 @@ INSERT INTO `payment` (`pay_id`, `pay_order_id`, `pay_payment_ref`, `pay_amount`
 --
 
 CREATE TABLE `sessions` (
-  `ses_id` bigint(20) NOT NULL,
+  `ses_id` bigint(20) NOT NULL PRIMARY KEY,
   `ses_title` varchar(200) NOT NULL,
   `ses_description` text DEFAULT NULL,
   `ses_track_id` bigint(20) DEFAULT NULL,
@@ -189,7 +190,7 @@ INSERT INTO `sessions` (`ses_id`, `ses_title`, `ses_description`, `ses_track_id`
 --
 
 CREATE TABLE `tickets` (
-  `tkt_id` bigint(20) NOT NULL,
+  `tkt_id` bigint(20) NOT NULL PRIMARY KEY,
   `tkt_name` varchar(150) NOT NULL,
   `tkt_description` text DEFAULT NULL,
   `tkt_price` decimal(10,2) NOT NULL,
@@ -211,7 +212,7 @@ INSERT INTO `tickets` (`tkt_id`, `tkt_name`, `tkt_description`, `tkt_price`, `tk
 --
 
 CREATE TABLE `tracks` (
-  `trk_id` bigint(20) NOT NULL,
+  `trk_id` bigint(20) NOT NULL PRIMARY KEY,
   `trk_level` enum('general','intermediate','advanced','junior') NOT NULL,
   `trk_created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -233,7 +234,7 @@ INSERT INTO `tracks` (`trk_id`, `trk_level`, `trk_created_at`) VALUES
 --
 
 CREATE TABLE `users` (
-  `usr_id` bigint(20) NOT NULL,
+  `usr_id` bigint(20) NOT NULL PRIMARY KEY,
   `usr_firstname` varchar(150) NOT NULL,
   `usr_lastname` varchar(100) NOT NULL,
   `usr_email` varchar(150) NOT NULL,
@@ -260,7 +261,7 @@ INSERT INTO `users` (`usr_id`, `usr_firstname`, `usr_lastname`, `usr_email`, `us
 --
 
 CREATE TABLE `user_session` (
-  `use_id` int(11) NOT NULL,
+  `use_id` int(11) NOT NULL PRIMARY KEY,
   `use_userid` bigint(20) NOT NULL,
   `use_sessionid` bigint(20) NOT NULL,
   `use_datereg` datetime DEFAULT NULL
@@ -274,27 +275,23 @@ CREATE TABLE `user_session` (
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`adm_id`),
   ADD UNIQUE KEY `adm_email` (`adm_email`);
 
 --
 -- Indexes for table `alembic_version`
 --
-ALTER TABLE `alembic_version`
-  ADD PRIMARY KEY (`version_num`);
+
 
 --
 -- Indexes for table `conversations`
 --
 ALTER TABLE `conversations`
-  ADD PRIMARY KEY (`con_id`),
   ADD KEY `con_created_by` (`con_created_by`);
 
 --
 -- Indexes for table `conversation_messages`
 --
 ALTER TABLE `conversation_messages`
-  ADD PRIMARY KEY (`msg_id`),
   ADD KEY `msg_conversation_id` (`msg_conversation_id`),
   ADD KEY `msg_user_id` (`msg_user_id`);
 
@@ -302,7 +299,6 @@ ALTER TABLE `conversation_messages`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ord_id`),
   ADD UNIQUE KEY `ord_order_ref` (`ord_order_ref`),
   ADD KEY `ord_ticket_id` (`ord_ticket_id`),
   ADD KEY `ord_user_id` (`ord_user_id`);
@@ -311,33 +307,27 @@ ALTER TABLE `orders`
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`pay_id`),
   ADD KEY `pay_order_id` (`pay_order_id`);
 
 --
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`ses_id`),
   ADD KEY `ses_track_id` (`ses_track_id`);
 
 --
 -- Indexes for table `tickets`
 --
-ALTER TABLE `tickets`
-  ADD PRIMARY KEY (`tkt_id`);
+
 
 --
 -- Indexes for table `tracks`
 --
-ALTER TABLE `tracks`
-  ADD PRIMARY KEY (`trk_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`usr_id`),
   ADD UNIQUE KEY `usr_email` (`usr_email`),
   ADD KEY `usr_track_id` (`usr_track_id`);
 
@@ -345,7 +335,6 @@ ALTER TABLE `users`
 -- Indexes for table `user_session`
 --
 ALTER TABLE `user_session`
-  ADD PRIMARY KEY (`use_id`),
   ADD KEY `use_sessionid` (`use_sessionid`),
   ADD KEY `use_userid` (`use_userid`);
 

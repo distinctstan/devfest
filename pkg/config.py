@@ -1,6 +1,6 @@
 class General(object):
     APP_NAME="DevFest App"
-    SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://freedb_devfest_user:hFyqa3G&XFE5Mf3@sql.freedb.tech:3306/freedb_devfest_db'
+    SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://avnadmin:AVNS_0DGOppAMKgvy63mM3Cg@mysql-63c54de-stantechsolutions20-433a.k.aivencloud.com:22971/devfestdb?ssl-mode=REQUIRED'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 class TestConfig(General):
