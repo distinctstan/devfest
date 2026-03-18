@@ -1,6 +1,6 @@
 class General(object):
     APP_NAME="DevFest App"
-    SQLALCHEMY_DATABASE_URI='mysql+pymysql://avnadmin:AVNS_0DGOppAMKgvy63mM3Cg@mysql-63c54de-stantechsolutions20-433a.k.aivencloud.com:22971/devfestdb'
+    SQLALCHEMY_DATABASE_URI='postgresql://devfest_db_x2af_user:y4sDsBVjrjKL1KBpkB04AURUdJBvHNL8@dpg-d6t652vkijhs73etmspg-a.oregon-postgres.render.com/devfest_db_x2af'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 class TestConfig(General):
